@@ -2,17 +2,17 @@
 #include <time.h>
 typedef struct {
     unsigned long long int rg;
-    const char* cpf;
-    const char* name;
+    char* cpf;
+    char* name;
 }person_t;
 
-person_t gen_person();
+person_t gen_person(void);
 
-const char* randomcpf();
+char* randomcpf();
 
-unsigned long long int randomrg();
+unsigned long long int randomrg(void);
 
-const char* randomname();
+char* randomname();
 
 unsigned int randomEx(int min, int max);
 

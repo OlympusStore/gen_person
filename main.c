@@ -3,47 +3,48 @@
 #include "main.h"
 
 unsigned int randomEx(int min, int max) {
-    srand((unsigned) time (NULL));
-    return min + (rand() % max);
+    srand(time(0));
+    int res = min + (rand() % max);
+    return res;
 }
 
-const char* randomcpf() {
+char* randomcpf() {
     unsigned int cpf[4];
     cpf[0] = randomEx(100, 400);
+    srand(time(0));
     cpf[1] = randomEx(100, 600);
+    srand(time(0));
     cpf[2] = randomEx(100, 500);
+    srand(time(0));
     cpf[3] = randomEx(10, 100);
-    char* str;
+    char* str = malloc(255);
     sprintf(str, "%d.%d.%d-%d", cpf[0], cpf[1], cpf[2], cpf[3]);
     return str;
 }
 
-const char* randomname() {
-    char* str;
+char* randomname() {
+    char* str = malloc(255);
     unsigned int fn;
     unsigned int sn;
     fn = randomEx(0, 6);
+    srand(time(0));
     sn = randomEx(0, 6);
     sprintf(str, "%s %s", name[fn][0], name[sn][1]);
     return str;
 }
 
-unsigned long long int randomrg() {
-    char* str;
-    sprintf(str, "%d%d%d%d", randomEx(2, 20), randomEx(2, 20), randomEx(2, 20), randomEx(2, 20));
+unsigned long long int randomrg(void) {
+    char str[255];
+    sprintf(str, "%d%d%d%d", randomEx(100, 500), randomEx(100, 500), randomEx(100, 500), randomEx(100, 500));
     return atoi(str);
 }
 
-person_t gen_person() {
-    person_t person;
-    const char* newcpf;
-    newcpf = randomcpf();
-    const char* newname = randomname();
-    unsigned long long int newrg = randomrg();
-    person.cpf = newcpf;
-    person.name = newname;
-    person.rg = newrg;
-    return (person_t)person;
+person_t gen_person(void) {
+    person_t newp;
+    newp.name = randomname();
+    newp.cpf = randomcpf();
+    newp.rg = randomrg();
+    return (person_t)newp;
 }
 
 void printPerson(person_t p) {
@@ -51,8 +52,8 @@ void printPerson(person_t p) {
 }
 
 int main(void) {
-    person_t newp = (person_t)gen_person();
-    printPerson(newp);
+    person_t person = gen_person();
+    printPerson(person);
     getchar();
     return 0;
 }
