@@ -11,11 +11,8 @@ unsigned int randomEx(int min, int max) {
 char* randomcpf() {
     unsigned int cpf[4];
     cpf[0] = randomEx(100, 400);
-    srand(time(0));
     cpf[1] = randomEx(100, 600);
-    srand(time(0));
     cpf[2] = randomEx(100, 500);
-    srand(time(0));
     cpf[3] = randomEx(10, 100);
     char* str = malloc(255);
     sprintf(str, "%d.%d.%d-%d", cpf[0], cpf[1], cpf[2], cpf[3]);
@@ -27,7 +24,6 @@ char* randomname() {
     unsigned int fn;
     unsigned int sn;
     fn = randomEx(0, 6);
-    srand(time(0));
     sn = randomEx(0, 6);
     sprintf(str, "%s %s", name[fn][0], name[sn][1]);
     return str;
